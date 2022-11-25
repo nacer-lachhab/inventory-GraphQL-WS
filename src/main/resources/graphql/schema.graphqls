@@ -1,5 +1,17 @@
 type Query{
-    productList : [Product]
+    productsList : [Product],
+    productByName(name:String): [Product],
+    categoryByLibelle(libelle:String) : [Category],
+    categoriesList: [Category]
+}
+
+type Mutation{
+    saveProduct(productRequest:ProductRequest):Product,
+    editProduct(idProduct:String,productRequest:ProductRequest):Product,
+    deleteProduct(idProduct:String): String,
+    saveCategory(categoryRequest:CategoryRequest):Category,
+    editCategory(categoryRequest:CategoryRequest,idCategory:Float):Category,
+    deleteCategory(idCategory:Float):String
 }
 
 type Product{
@@ -12,5 +24,17 @@ type Product{
 
 type Category{
     id :Int,
+    libelle : String,
+    products : [Product]
+}
+
+input ProductRequest{
+    name : String,
+    price : Float,
+    quantity : Int,
+    idCategory : Float
+}
+
+input CategoryRequest{
     libelle : String
 }
